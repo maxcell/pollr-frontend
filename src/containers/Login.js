@@ -1,11 +1,21 @@
 import React, { Component } from 'react'
 
-import { loginUser } from '../adapters/userAdapter'
+import { connect } from 'react-redux';
+import { login } from '../redux/actions/login'
+import { currentUser } from '../redux/actions/current_user' 
 
-export default class Login extends Component {
+class Login extends Component {
   state = {
     email: '',
     password: '',
+  }
+
+  componentDidMount(){
+    const token = localStorage.getItem('jwt')
+    if(token){
+      this.props.dispatch(currentUser(token))
+      .then(json => this.props.history.push('/dashboard'))
+    }
   }
 
   handleChange = (e) => {
@@ -17,12 +27,12 @@ export default class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     const loginCredentials = {...this.state}
-    loginUser(loginCredentials)
-    .then(console.log)
+    this.props.dispatch(login(loginCredentials))
+    .then(json => this.props.history.push('/dashboard'))
   }
   
   render() {
-    return  (
+      return  (
       <section>
         <h1>Log In</h1>
         <>
@@ -38,3 +48,14 @@ export default class Login extends Component {
     )
   }
 }
+
+function mapStateToProps(state){
+  const { loggedIn, currentUser, isLoading } = state.auth
+  return {
+    loggedIn,
+    currentUser,
+    isLoading
+  }
+}
+
+export default connect(mapStateToProps)(Login)

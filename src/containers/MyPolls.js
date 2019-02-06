@@ -1,7 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux' 
+
 const MyPolls = (props) => {
+  console.log(props)
   return (
     <div>
       <Link to="#">Create a New Poll</Link>
@@ -10,4 +13,11 @@ const MyPolls = (props) => {
   )
 }
 
-export default MyPolls;
+function mapStateToProps(state){
+  const { currentUser } = state.auth
+  return {
+    currentUser
+  }
+}
+
+export default connect(mapStateToProps)(MyPolls);

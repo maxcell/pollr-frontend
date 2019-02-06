@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { signupUser } from '../adapters/userAdapter'
+import { Redirect } from 'react-router-dom'
 
 export default class SignUp extends Component {
   state = {
@@ -23,6 +24,10 @@ export default class SignUp extends Component {
   }
   
   render() {
+    if(localStorage.getItem('jwt')){
+      return <Redirect to="/dashboard"/>
+    }
+
     return  (
       <section>
         <h1>Sign Up</h1>

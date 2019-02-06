@@ -22,3 +22,16 @@ export const signupUser = (data) => {
   })
   .then(res => res.json())
 }
+
+export const getCurrentUser = (token) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': token
+  }
+
+  return fetch(`${BASE_API_URL}/me`, {
+    method: "GET",
+    headers: headers
+  })
+  .then(res => res.json())
+}
