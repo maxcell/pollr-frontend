@@ -1,10 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-import { connect } from 'react-redux' 
+import { connect } from 'react-redux'
 
 const MyPolls = (props) => {
-  console.log(props)
   return (
     <div>
       <Link to="#">Create a New Poll</Link>

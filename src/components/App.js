@@ -7,6 +7,7 @@ import SignUp from '../containers/SignUp';
 import MyPolls from '../containers/MyPolls'
 import PrivateRoute from '../components/PrivateRoute'
 import { logout } from '../redux/actions/login';
+import { currentUser } from '../redux/actions/current_user'
 import { connect } from 'react-redux';
 
 
@@ -15,6 +16,12 @@ class App extends Component {
 
   handleLogout = (e) => {
     this.props.dispatch(logout())
+  }
+
+  componentDidMount(){
+    if(!this.props.currentUser){
+      this.props.dispatch(currentUser(localStorage.getItem('jwt')))
+    }
   }
 
   render() {
@@ -54,7 +61,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = function mapStateToProps(state){
   const { loggedIn, currentUser } = state.auth
-  console.log(loggedIn)
   return {
     loggedIn,
     currentUser,

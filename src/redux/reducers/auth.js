@@ -34,12 +34,12 @@ export default function(state = initialState, action){
         isLoading: true,
         currentUser: action.jwt
       }
-    case CURRENT_USER_ERROR:
+    case CURRENT_USER_SUCCESS:
       return {
         isLoading: false,
         currentUser: action.current_user
       }
-    case CURRENT_USER_SUCCESS:
+    case CURRENT_USER_ERROR:
       return {
         isLoading: false,
         errors: action.errors
