@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    if(!this.props.currentUser){
+    if(localStorage.getItem('jwt') && !this.props.currentUser){
       this.props.dispatch(currentUser(localStorage.getItem('jwt')))
     }
   }
