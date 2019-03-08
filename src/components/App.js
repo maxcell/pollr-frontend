@@ -59,12 +59,12 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const mapStateToProps = function mapStateToProps(state){
-  const { loggedIn, currentUser } = state.auth
-  return {
-    loggedIn,
-    currentUser,
-  }
-}
+// const mapStateToProps = function(state){
+//   const { loggedIn, currentUser } = state.auth
+//   return {
+//     loggedIn,
+//     currentUser,
+//   }
+// }
 
 export default withRouter(connect(mapDispatchToProps)(App))
